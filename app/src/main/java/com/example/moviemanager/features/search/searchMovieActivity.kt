@@ -1,7 +1,9 @@
 package com.example.moviemanager.features.search
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -9,10 +11,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviemanager.R
+import com.example.moviemanager.base.baseActivity
+import com.example.moviemanager.features.details.movieDetailActivity
 import com.example.moviemanager.utils.API_KEY
 import kotlinx.android.synthetic.main.activity_search_movie.*
 
-class searchMovieActivity : AppCompatActivity() {
+class searchMovieActivity : baseActivity() {
 
     lateinit var myViewModel:searchViewModel
 
@@ -42,6 +46,10 @@ class searchMovieActivity : AppCompatActivity() {
     //*******************************************
     private fun showSearchDetail(id:Int)
     {
-        Toast.makeText(this,"movie id is "+id.toString(),Toast.LENGTH_SHORT).show()
+        Log.d("myError","movie id is "+id.toString())
+        val intent=Intent(this,movieDetailActivity::class.java)
+        intent.putExtra("movieId",id)
+        startActivity(intent)
+
     }
 }

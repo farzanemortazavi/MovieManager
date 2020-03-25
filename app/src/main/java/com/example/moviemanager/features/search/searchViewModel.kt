@@ -3,11 +3,12 @@ package com.example.moviemanager.features.search
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.moviemanager.base.baseViewModel
 import com.example.moviemanager.pojo.searchResponseModel
 import com.example.moviemanager.repository.repositoryClass
 import io.reactivex.disposables.CompositeDisposable
 
-class searchViewModel(): ViewModel() {
+class searchViewModel(): baseViewModel() {
     val searchResponse=MutableLiveData<searchResponseModel>()
     val searchErrorRespose=MutableLiveData<String>()
 

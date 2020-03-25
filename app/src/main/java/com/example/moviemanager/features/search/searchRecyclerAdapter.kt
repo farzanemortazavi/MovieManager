@@ -4,6 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviemanager.R
+import com.example.moviemanager.base.extensions.load
 import com.example.moviemanager.pojo.Result
 import com.example.moviemanager.utils.IMAGE_BASE_URL
 import com.example.moviemanager.utils.SMALL_PIC_SIZE
@@ -34,7 +35,8 @@ class searchRecyclerAdapter(val moviewList:List<Result>, val clickListener:(Int)
             view.txtMovieItemDate.text=obj.release_date
             view.txtMovieItemRank.text=obj.vote_average.toString()
 
-            Picasso.get().load(IMAGE_BASE_URL+ SMALL_PIC_SIZE+obj.poster_path).into(view.imgMovieItemPoster)
+           // Picasso.get().load(IMAGE_BASE_URL+ SMALL_PIC_SIZE+obj.poster_path).into(view.imgMovieItemPoster)
+            view.imgMovieItemPoster.load(IMAGE_BASE_URL+ SMALL_PIC_SIZE+obj.poster_path)
 
             view.setOnClickListener{
                 clickListener(obj.id)

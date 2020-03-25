@@ -13,7 +13,7 @@ class repositoryClass() {
 
     }
 
-    fun getMovieDetails(id:Long,apiKey: String):Observable<movieResponseModel>{
+    fun getMovieDetails(id:Int,apiKey: String):Observable<movieResponseModel>{
         return networkRepository.getMovieDetails(id,apiKey)
 
     }

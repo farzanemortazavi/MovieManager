@@ -18,8 +18,7 @@ class networkRepository() {
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    fun getMovieDetails(id:Long,apiKey: String):Observable<movieResponseModel>{
-        Log.d("myError","API Key is "+apiKey)
+    fun getMovieDetails(id:Int,apiKey: String):Observable<movieResponseModel>{
         return iretrofit.getMovieDetails(id,apiKey)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -9,7 +9,7 @@ import retrofit2.http.Query
 
 interface IMoviesRetrofit {
     @GET("movie/{movie_id}")
-    fun getMovieDetails(@Path("movie_id") movieId:Long,@Query("api_key")  apiKey:String)
+    fun getMovieDetails(@Path("movie_id") movieId:Int,@Query("api_key")  apiKey:String)
             :Observable<movieResponseModel>
 
     @GET("search/movie")
