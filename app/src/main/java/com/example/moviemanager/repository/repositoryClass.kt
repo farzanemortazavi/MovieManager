@@ -5,7 +5,9 @@ import com.example.moviemanager.pojo.searchResponseModel
 import com.example.moviemanager.repository.network.networkRepository
 import io.reactivex.Observable
 
-class repositoryClass(private val networkRepository: networkRepository) {
+class repositoryClass() {
+
+    private val networkRepository= networkRepository()
     fun getMovieList(saerchPhrase:String,apiKey:String ): Observable<searchResponseModel> {
         return networkRepository.getMovieList(apiKey,saerchPhrase)
 
