@@ -1,18 +1,20 @@
 package com.example.moviemanager.features.search
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.moviemanager.R
+import com.example.moviemanager.base.DI.DaggerfactoryComplonent
+import com.example.moviemanager.base.DI.factoryComplonent
 import com.example.moviemanager.base.baseActivity
+import com.example.moviemanager.base.DI.viewModelFactory
 import com.example.moviemanager.features.details.movieDetailActivity
+import com.example.moviemanager.repository.network.networkRepository
+import com.example.moviemanager.repository.repositoryClass
 import com.example.moviemanager.utils.API_KEY
 import kotlinx.android.synthetic.main.activity_search_movie.*
 
@@ -24,7 +26,9 @@ class searchMovieActivity : baseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_movie)
 
-        myViewModel=ViewModelProvider(this).get(searchViewModel::class.java)
+        val factory=DaggerfactoryComplonent.create().provideVMFactory()
+
+        myViewModel=ViewModelProvider(this,factory).get(searchViewModel::class.java)
 
 
         btnSearch.setOnClickListener{

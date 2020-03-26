@@ -7,12 +7,13 @@ import com.example.moviemanager.base.baseViewModel
 import com.example.moviemanager.pojo.searchResponseModel
 import com.example.moviemanager.repository.repositoryClass
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class searchViewModel(): baseViewModel() {
+class searchViewModel @Inject constructor(val repository:repositoryClass ): baseViewModel() {
     val searchResponse=MutableLiveData<searchResponseModel>()
     val searchErrorRespose=MutableLiveData<String>()
 
-    private val repository=repositoryClass()
+    //private val repository=repositoryClass()
     val disposable= CompositeDisposable()
 
 

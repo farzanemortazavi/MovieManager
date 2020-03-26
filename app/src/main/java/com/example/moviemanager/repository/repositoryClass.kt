@@ -9,10 +9,11 @@ import com.example.moviemanager.room.movieTable
 import io.reactivex.Completable
 import io.reactivex.Observable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class repositoryClass() {
+class repositoryClass @Inject constructor(val network:networkRepository) {
 
-    private val network= networkRepository()
+    //private val network= networkRepository()
 
 
 

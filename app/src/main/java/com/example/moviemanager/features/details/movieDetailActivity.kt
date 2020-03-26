@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.room.Room
 import com.example.moviemanager.R
+import com.example.moviemanager.base.DI.DaggerfactoryComplonent
 import com.example.moviemanager.base.baseActivity
 import com.example.moviemanager.base.extensions.load
 import com.example.moviemanager.pojo.movieResponseModel
@@ -24,7 +25,8 @@ class movieDetailActivity : baseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movie_detail)
 
-        myViewModel= ViewModelProvider(this).get(movieDetailViewModel::class.java)
+        val factory=DaggerfactoryComplonent.create().provideVMFactory()
+        myViewModel= ViewModelProvider(this, factory).get(movieDetailViewModel::class.java)
 
         val movieId=intent.getIntExtra("movieId",0)
         if(movieId==0){
