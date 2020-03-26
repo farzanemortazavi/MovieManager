@@ -6,10 +6,12 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.room.Room
 import com.example.moviemanager.R
 import com.example.moviemanager.base.baseActivity
 import com.example.moviemanager.base.extensions.load
 import com.example.moviemanager.pojo.movieResponseModel
+import com.example.moviemanager.room.appDatabase
 import com.example.moviemanager.utils.API_KEY
 import com.example.moviemanager.utils.IMAGE_BASE_URL
 import com.example.moviemanager.utils.LARGE_PIC_SIZE
@@ -33,6 +35,8 @@ class movieDetailActivity : baseActivity() {
             showMovieDetails(movieId)
 
         }
+
+
 
     }
     //**************************************************
