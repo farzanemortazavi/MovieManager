@@ -6,3 +6,4 @@ package com.example.moviemanager.utils
     const val IMAGE_BASE_URL="https://image.tmdb.org/t/p/"
     const val SMALL_PIC_SIZE="w185/"
     const val LARGE_PIC_SIZE="w300/"
+    const val DATABASE_NAME="moviedb"

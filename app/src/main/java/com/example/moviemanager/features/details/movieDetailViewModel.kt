@@ -30,4 +30,9 @@ class movieDetailViewModel:baseViewModel() {
 
     }
 
+    override fun onCleared() {
+        super.onCleared()
+        disposable.dispose()
+    }
+
 }
