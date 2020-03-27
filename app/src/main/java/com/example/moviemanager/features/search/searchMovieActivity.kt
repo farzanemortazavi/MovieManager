@@ -12,7 +12,10 @@ import com.example.moviemanager.base.DI.DaggerfactoryComplonent
 import com.example.moviemanager.base.DI.factoryComplonent
 import com.example.moviemanager.base.baseActivity
 import com.example.moviemanager.base.DI.viewModelFactory
+import com.example.moviemanager.base.extensions.isInternetAvailable
+import com.example.moviemanager.base.extensions.showToast
 import com.example.moviemanager.features.details.movieDetailActivity
+import com.example.moviemanager.features.offlineList.offlineListActivity
 import com.example.moviemanager.repository.network.networkRepository
 import com.example.moviemanager.repository.repositoryClass
 import com.example.moviemanager.utils.API_KEY
@@ -32,6 +35,10 @@ class searchMovieActivity : baseActivity() {
 
 
         btnSearch.setOnClickListener{
+
+            /*if(this.isInternetAvailable())
+                this.showToast("Please check your internet connection")*/
+
             myViewModel.getSearchResponseData(API_KEY,edtSearch.text.toString().trim())
         }
 
@@ -44,10 +51,20 @@ class searchMovieActivity : baseActivity() {
             searchRecycler.layoutManager= LinearLayoutManager(this, RecyclerView.VERTICAL,false)
         })
 
+      /*  myViewModel.searchErrorRespose.observe(this, Observer {
+            this.showToast(it)
+        })
+
+        txtGoOffline.setOnClickListener {
+            val intent=Intent(this,offlineListActivity::class.java)
+            startActivity(intent)
+
+        }*/
+
 
 
     }
-    //*******************************************
+    //---------------------------------------------------------------------
     private fun showSearchDetail(id:Int)
     {
         Log.d("myError","movie id is "+id.toString())

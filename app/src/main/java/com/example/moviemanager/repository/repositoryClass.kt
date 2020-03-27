@@ -11,11 +11,10 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import javax.inject.Inject
 
-class repositoryClass @Inject constructor(val network:networkRepository) {
+class repositoryClass @Inject constructor(private val network:networkRepository) {
 
     //private val network= networkRepository()
-
-
+    //private val local=localRepository()
 
     fun getMovieList(saerchPhrase:String,apiKey:String ): Observable<searchResponseModel> {
         return network.getMovieList(apiKey,saerchPhrase)
@@ -27,30 +26,25 @@ class repositoryClass @Inject constructor(val network:networkRepository) {
 
     }
     //--------------------------------------------------------
-    fun getOfflineMoveList(context:Context): Single<List<movieTable>> {
-        val local=localRepository(context)
+    /*fun getOfflineMoveList(): Single<List<movieTable>> {
         return local.getOfflineList()
     }
     //--------------------------------------------------------
-    fun saveMovieDetails(movie:movieTable,context:Context): Completable {
-        val local=localRepository(context)
+    fun saveMovieDetails(movie:movieTable): Completable {
         return local.saveMovieDetails(movie)
     }
     //--------------------------------------------------------
-    fun isExistMovie(id:Int,context:Context):Single<Boolean>{
-        val local=localRepository(context)
+    fun isExistMovie(id:Int):Single<Boolean>{
         return local.isExistMovie(id)
     }
     //--------------------------------------------------------
-    fun deleteMovie(id:Int,context:Context):Completable{
-        val local=localRepository(context)
+    fun deleteMovie(id:Int):Completable{
         return local.deleteMovie(id)
     }
     //--------------------------------------------------------
-    fun getMovieFromDB(id: Int,context:Context): Single<movieTable>{
-        val local=localRepository(context)
+    fun getMovieFromDB(id: Int): Single<movieTable>{
         return local.getMovieFromDB(id)
-    }
+    }*/
 
 
 }

@@ -11,8 +11,10 @@ import com.example.moviemanager.R
 import com.example.moviemanager.base.DI.DaggerfactoryComplonent
 import com.example.moviemanager.base.baseActivity
 import com.example.moviemanager.base.extensions.load
+import com.example.moviemanager.base.extensions.showToast
 import com.example.moviemanager.pojo.movieResponseModel
 import com.example.moviemanager.room.appDatabase
+import com.example.moviemanager.room.movieTable
 import com.example.moviemanager.utils.API_KEY
 import com.example.moviemanager.utils.IMAGE_BASE_URL
 import com.example.moviemanager.utils.LARGE_PIC_SIZE
@@ -20,6 +22,8 @@ import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class movieDetailActivity : baseActivity() {
     lateinit var myViewModel:movieDetailViewModel
+    lateinit var movieObj:movieTable
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,13 +34,28 @@ class movieDetailActivity : baseActivity() {
 
         val movieId=intent.getIntExtra("movieId",0)
         if(movieId==0){
-            Toast.makeText(this,"wrong movie Id",Toast.LENGTH_SHORT)
+            this.showToast("wrong movie Id")
         }
         else
         {
             showMovieDetails(movieId)
 
         }
+
+        btnSave.setOnClickListener{
+            myViewModel.detailResponse.observe(this, Observer {
+                val movie=movieTable(it.id,it.title,it.vote_average.toString(),it.release_date,it.overview
+                ,txtMovieGenres.text.toString(),it.poster_path,it.backdrop_path)
+                myViewModel.saveMovieDetails(movie)
+                this.showToast("movie is saved")
+            })
+
+
+        }
+
+        myViewModel.detailErrorRespose.observe(this, Observer {
+            this.showToast(it)
+        })
 
 
 

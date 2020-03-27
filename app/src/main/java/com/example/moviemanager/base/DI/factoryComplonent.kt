@@ -4,7 +4,7 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [retrofitModule::class,viewModelFactoryProvider::class])
+@Component(modules = [retrofitModule::class,viewModelFactoryProvider::class,roomModule::class])
 interface factoryComplonent {
     fun provideVMFactory():viewModelFactory
 }

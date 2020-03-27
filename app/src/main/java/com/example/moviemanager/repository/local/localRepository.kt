@@ -1,42 +1,45 @@
 package com.example.moviemanager.repository.local
 
 import android.content.Context
+import com.example.moviemanager.room.ImovieDao
 import com.example.moviemanager.room.databaseBuilder
 import com.example.moviemanager.room.movieTable
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class localRepository(context:Context) {
-    private val db=databaseBuilder.getDatabasenIstance(context)
+class localRepository @Inject constructor(val dbDao:ImovieDao) {
+    //private val db=databaseBuilder.getDatabasenIstance(context)
+
 
     fun saveMovieDetails(movie:movieTable):Completable{
-        return db.ImovieDao().insertMovie(movie)
+        return dbDao.insertMovie(movie)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
     //----------------------------------------------------
     fun getOfflineList(): Single<List<movieTable>> {
-        return db.ImovieDao().getAllMovies()
+        return dbDao.getAllMovies()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
     //-------------------------------------------------
     fun isExistMovie(id:Int):Single<Boolean>{
-        return db.ImovieDao().isExistMovie(id)
+        return dbDao.isExistMovie(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
     //-------------------------------------------------
     fun deleteMovie(id:Int):Completable{
-        return db.ImovieDao().deleteMovie(id)
+        return dbDao.deleteMovie(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
     //-------------------------------------------------
     fun getMovieFromDB(id: Int): Single<movieTable>{
-        return db.ImovieDao().getMovie(id)
+        return dbDao.getMovie(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
