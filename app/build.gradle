@@ -11,6 +11,14 @@ def room_version = "2.2.5"
 
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('D:\\AndroidDevelopment\\class\\advance\\myProject\\keystore.jks')
+            storePassword 'moviemanager'
+            keyAlias = 'movie'
+            keyPassword 'moviemanager'
+        }
+    }
     compileSdkVersion 28
     buildToolsVersion "29.0.1"
     defaultConfig {
@@ -23,8 +31,10 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
