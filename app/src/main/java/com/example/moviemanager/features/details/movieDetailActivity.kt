@@ -11,13 +11,18 @@ import com.example.moviemanager.R
 import com.example.moviemanager.base.DI.DaggerfactoryComplonent
 import com.example.moviemanager.base.baseActivity
 import com.example.moviemanager.base.extensions.load
+import com.example.moviemanager.base.extensions.logData
 import com.example.moviemanager.base.extensions.showToast
 import com.example.moviemanager.pojo.movieResponseModel
 import com.example.moviemanager.room.appDatabase
+import com.example.moviemanager.room.databaseBuilder
 import com.example.moviemanager.room.movieTable
 import com.example.moviemanager.utils.API_KEY
+import com.example.moviemanager.utils.DATABASE_NAME
 import com.example.moviemanager.utils.IMAGE_BASE_URL
 import com.example.moviemanager.utils.LARGE_PIC_SIZE
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 
 class movieDetailActivity : baseActivity() {
@@ -41,13 +46,32 @@ class movieDetailActivity : baseActivity() {
             showMovieDetails(movieId)
 
         }
+        val db=databaseBuilder.getDatabasenIstance(this)
+
 
         btnSave.setOnClickListener{
             myViewModel.detailResponse.observe(this, Observer {
                 val movie=movieTable(it.id,it.title,it.vote_average.toString(),it.release_date,it.overview
                 ,txtMovieGenres.text.toString(),it.poster_path,it.backdrop_path)
-                myViewModel.saveMovieDetails(movie)
-                this.showToast("movie is saved")
+                //myViewModel.saveMovieDetails(movie)
+
+                this.logData("movieId is: "+movie.id.toString())
+
+
+
+                db.ImovieDao().insertMovie(movie)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        this.showToast("movie is saved")
+
+                    },{
+
+                        this.logData(it.message.toString())
+                        this.showToast("error in saving movie")
+                    })
+
+
             })
 
 
@@ -77,7 +101,7 @@ class movieDetailActivity : baseActivity() {
 
         )
     }
-    //*************************************************
+    //----------------------------------------------------
     fun getGenres(movie:movieResponseModel):String{
         var result=""
         val listCount= movie.genres.size
@@ -90,4 +114,5 @@ class movieDetailActivity : baseActivity() {
        // Log.d("myError","movie id is "+result)
         return result
     }
+    //---------------------------------------------------
 }

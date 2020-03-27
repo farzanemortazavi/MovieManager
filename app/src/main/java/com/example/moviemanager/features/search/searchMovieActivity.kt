@@ -3,6 +3,8 @@ package com.example.moviemanager.features.search
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.ProgressBar
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -33,6 +35,15 @@ class searchMovieActivity : baseActivity() {
 
         myViewModel=ViewModelProvider(this,factory).get(searchViewModel::class.java)
 
+        btnMenu.setOnClickListener{
+            try {
+                drawer.openDrawer(GravityCompat.START)
+
+            }
+            catch (e:Exception){
+                Log.d("myMain", e.message)
+            }}
+
 
         btnSearch.setOnClickListener{
 
@@ -40,6 +51,7 @@ class searchMovieActivity : baseActivity() {
                 this.showToast("Please check your internet connection")*/
 
             myViewModel.getSearchResponseData(API_KEY,edtSearch.text.toString().trim())
+            progressBar.visibility=ProgressBar.VISIBLE
         }
 
         myViewModel.searchResponse.observe(this, Observer {
@@ -49,17 +61,23 @@ class searchMovieActivity : baseActivity() {
             }
             searchRecycler.adapter=adapter
             searchRecycler.layoutManager= LinearLayoutManager(this, RecyclerView.VERTICAL,false)
+            progressBar.visibility=ProgressBar.GONE
         })
 
-      /*  myViewModel.searchErrorRespose.observe(this, Observer {
+        myViewModel.searchErrorRespose.observe(this, Observer {
             this.showToast(it)
+            progressBar.visibility=ProgressBar.GONE
         })
 
-        txtGoOffline.setOnClickListener {
-            val intent=Intent(this,offlineListActivity::class.java)
-            startActivity(intent)
 
-        }*/
+        menuOffline.setOnClickListener {
+            val myIntent=Intent(this, offlineListActivity::class.java)
+            startActivity(myIntent)
+
+
+        }
+
+
 
 
 

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MovieManager</string>
+    <string name="menu">&#xf0c9;</string>
+    <string name="search">&#xf002;</string>
+    <string name="popularity">&#xf004;</string>
+    <string name="save">&#xf02e;</string>
+    <string name="saveDisk">&#xf019;</string>
+    <string name="delete">&#xf2ed;</string>
 </resources>

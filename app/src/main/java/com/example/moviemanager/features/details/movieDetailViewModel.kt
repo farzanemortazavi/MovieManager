@@ -2,10 +2,12 @@ package com.example.moviemanager.features.details
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import androidx.room.Room
 import com.example.moviemanager.base.baseViewModel
 import com.example.moviemanager.pojo.movieResponseModel
 import com.example.moviemanager.pojo.searchResponseModel
 import com.example.moviemanager.repository.repositoryClass
+import com.example.moviemanager.room.appDatabase
 import com.example.moviemanager.room.movieTable
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -34,6 +36,8 @@ class movieDetailViewModel @Inject constructor(val repository:repositoryClass):b
     }
     //---------------------------------------------------------
     fun saveMovieDetails(movie:movieTable){
+
+
         /*disposable.add(repository.saveMovieDetails(movie)
             .subscribe({
                     isMovieSaved=true
